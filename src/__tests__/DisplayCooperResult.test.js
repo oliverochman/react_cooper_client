@@ -7,6 +7,7 @@ describe('<DisplatCooperResult />', () => {
   it('evaluates the correct result for female/poor', () => {
     const describedComponent = mount(<DisplayCooperResult distance="1000" gender="female" age="23"/>);
     const response = <p>Result: Poor</p>
+    console.log(describedComponent.text())
     expect(describedComponent.contains(response)).toEqual(true)
   })
 

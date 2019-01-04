@@ -16,17 +16,17 @@ class App extends Component {
       <div className="App">
         <div>
           <label>Distance</label>
-          <input id="distance"></input>
+          <input id="distance" onChange={(e) => this.setState({ distance: e.target.value})}></input>
         </div>
         
-        <select id="gender">
+        <select id="gender" onChange={(e) => this.setState({gender: e.target.value})}>
           <option value="female">Female</option>
           <option value="male">Male</option>
         </select>
 
         <div>
           <label>Age</label>
-          <input id="age"></input>
+          <input id="age" onChange={(e) => this.setState({ age: e.target.value})}></input>
         </div>
 
         <DisplayCooperResult
