@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import DisplayCooperResult from './DisplayCooperResult'
 
 class App extends Component {
   render() {
@@ -20,6 +21,12 @@ class App extends Component {
           <label>Age</label>
           <input id="age"></input>
         </div>
+
+      <DisplayCooperResult
+        distance={this.state.distance}
+        gender={this.state.gender}
+        age={this.state.age}  
+      />
       </div>
     );
   }
