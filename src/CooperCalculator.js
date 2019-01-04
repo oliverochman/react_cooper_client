@@ -50,36 +50,33 @@ export const cooperCalculator = (distance, gender, age) => {
     }
   }
 
-    const ageRange = ageRangeTable(parseInt(age));
+  const ageRange = ageRangeTable(parseInt(age));
 
-    if (ageRange === 'invalid range') {
-        return 'Invalid age range';
-    }
+  if (ageRange === 'invalid range') {
+      return 'Invalid age range';
+  }
 
-    const distanceRanges = cooperTable[gender.toLowerCase()][
-        ageRange
-    ];
+  const distanceRanges = cooperTable[gender.toLowerCase()][
+      ageRange
+  ];
 
-    let ratingIndex;
+  let ratingIndex;
 
-    distanceRanges.forEach((dRange, index) => {
-        if (
-            (dRange.match(/>\d*/) && distance >= parseInt(dRange.slice(1), 10)) ||
-            (dRange.match(/<\d*/) && distance < parseInt(dRange.slice(1), 10))
-        ) {
-            ratingIndex = index;
-        } else {
-            const minMax = dRange.split('-');
-            const min = parseInt(minMax[0], 10);
-            const max = parseInt(minMax[1], 10);
+  distanceRanges.forEach((dRange, index) => {
+      if (
+          (dRange.match(/>\d*/) && distance >= parseInt(dRange.slice(1), 10)) ||
+          (dRange.match(/<\d*/) && distance < parseInt(dRange.slice(1), 10))
+      ) {
+          ratingIndex = index;
+      } else {
+          const minMax = dRange.split('-');
+          const min = parseInt(minMax[0], 10);
+          const max = parseInt(minMax[1], 10);
 
-            if (distance >= min && distance <= max) {
-                ratingIndex = index;
-            }
-        }
-    });
-
-    return ratings[ratingIndex];
-  
-
+          if (distance >= min && distance <= max) {
+              ratingIndex = index;
+          }
+      }
+  });
+  return ratings[ratingIndex];
 }
