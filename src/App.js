@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      distance: '',
+      gender: 'female',
+      age: ''
+    }
+  }
   render() {
     return (
       <div className="App">
@@ -22,11 +29,11 @@ class App extends Component {
           <input id="age"></input>
         </div>
 
-      <DisplayCooperResult
-        distance={this.state.distance}
-        gender={this.state.gender}
-        age={this.state.age}  
-      />
+        <DisplayCooperResult
+          distance={this.state.distance}
+          gender={this.state.gender}
+          age={this.state.age}  
+        />
       </div>
     );
   }
