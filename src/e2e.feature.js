@@ -10,7 +10,7 @@ describe('Cooper Client', () => {
   describe('Calculates successfully', async () => {
     beforeEach( async () => {
       await page.type('input[id="distance"]', '1000')
-      await page.select('select[name="gender"]', 'female')
+      await page.select('select[id="gender"]', 'female')
       await page.type('input[id="age"]', '23')
     })
 
