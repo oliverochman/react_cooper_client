@@ -14,12 +14,16 @@ describe('Cooper Client', () => {
       await page.type('input[id="age"]', '23')
     })
 
-    xit('displays age', async () => {
-      await expect(page).toMatch('Age: 23')
+    it('displays age', async () => {
+      await expect(page).toMatch('23 y/o')
     })
 
-    xit('displays gender', async () => {
-      await expect(page).toMatch('Gender: Female')
+    it('displays gender', async () => {
+      await expect(page).toMatch('female')
+    })
+
+    it('displays distance', async () => {
+      await expect(page).toMatch('running 1000 meters')
     })
 
     it('displays result', async () => {
