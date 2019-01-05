@@ -7,12 +7,11 @@ describe('User can login', () => {
         await page.reload();
       })
 
-      describe('with valid credentials', () => {
-          // click login link
-          // display form
-          // fill in form
-          // press submit
-          // expect "Welcome thomas@craft.com"
-          // expect <App /> to have state authenticated: true (component test)
+      describe('with valid credentials', async () => {
+        await page.click('button[id="login"]')
+        await page.type('input[id="email"]', 'johndoe@mail.com')
+        await page.type('input[id="password"]', 'password')
+        await page.click('button[id="submit')
+        await expect(page).toMatch('Welcome johndoe@mail.com')
       })
 })
