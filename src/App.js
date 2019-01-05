@@ -3,6 +3,7 @@ import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 
 class App extends Component {
+  // Set state authenticated: false
   constructor(props) {
     super(props);
     this.state = {
