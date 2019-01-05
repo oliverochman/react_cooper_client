@@ -8,23 +8,26 @@ describe('Cooper Client', () => {
   })
 
   describe('Calculates successfully', async () => {
-    beforeEach(async () => {
-      await page.type('input[id="distance"], 1000')
-      await page.select('select[name="gender"]', 'female')
-      await page.type('input[id="age"], 23')
+    beforeEach( async () => {
+      await page.type('input[id="distance"]', '1000')
+      await page.select('select[id="gender"]', 'female')
+      await page.type('input[id="age"]', '23')
     })
 
     it('displays age', async () => {
-      await expect(page).toMatch('Age: 23')
+      await expect(page).toMatch('23 y/o')
     })
 
     it('displays gender', async () => {
-      await expect(page).toMatch('Gender: Female')
+      await expect(page).toMatch('female')
+    })
+
+    it('displays distance', async () => {
+      await expect(page).toMatch('running 1000 meters')
     })
 
     it('displays result', async () => {
       await expect(page).toMatch('Result: Poor')
-
     })
   })
 })
