@@ -1,4 +1,4 @@
-describe('Cooper Client', () => {
+describe('Cooper Client', async () => {
   beforeAll(async () => {
     await page.goto('http://localhost:3000');
   });

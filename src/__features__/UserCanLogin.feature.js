@@ -1,4 +1,4 @@
-describe('User attempts to login',  () => {
+describe('User attempts to login', () => {
     beforeAll(async () => {
         await page.goto('http://localhost:3000');
     });
@@ -7,7 +7,7 @@ describe('User attempts to login',  () => {
         await page.reload();
     })
 
-    describe('with', async () => {
+    describe('with valid', async () => {
         it('valid credentials', async () => {
             await page.click('#login')
             await page.type('input[id="email"]', 'johndoe@mail.com')
@@ -15,6 +15,10 @@ describe('User attempts to login',  () => {
             await page.click('button[id="submit')
             await expect(page).toMatch('Welcome johndoe@mail.com')
         })
+
+    })
+
+    describe('with invalid', async () => {
 
         it('invalid credentials', async () => {
             await page.click('#login')
@@ -24,9 +28,4 @@ describe('User attempts to login',  () => {
             await expect(page).toMatch('Wrong password')
         })
     })
-
-
-    //   it('is running another test', async () =>{
-    //       expect(2 + 2).toEqual(4)
-    //   })
 })
