@@ -1,17 +1,12 @@
-const port = process.env.TEST_SERVER_PORT
-    ? Number(process.env.TEST_SERVER_PORT)
-    : 3000
-
-process.env.TEST_SERVER_PORT = port
 
 module.exports = {
     launch: {
-        headless: process.env.CI === 'true',
+        headless: false,
     },
-    browserContext: process.env.INCOGNITO ? 'incognito' : 'default',
+    browserContext: 'default',
     server: {
-        command: `cross-env PORT=${port} react-scripts start`,
-        port,
-        launchTimeout: 4000,
+        command: `cross-env PORT=3000 react-scripts start`,
+        launchTimeout: 10000,
+        debug: true
     },
 } 

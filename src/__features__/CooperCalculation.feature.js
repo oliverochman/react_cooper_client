@@ -6,6 +6,7 @@ describe('Cooper Client', async () => {
   beforeEach(async () => {
     await page.reload();
   })
+  
 
   describe('calculates successfully', async () => {
     beforeEach(async () => {
