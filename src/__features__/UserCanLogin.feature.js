@@ -7,7 +7,7 @@ describe('User can login', () => {
         await page.reload();
       })
 
-      describe('with valid credentials', async () => {
+      it('with valid credentials', async () => {
         await page.click('#login')
         await page.type('input[id="email"]', 'johndoe@mail.com')
         await page.type('input[id="password"]', 'password')
