@@ -11,49 +11,73 @@ class App extends Component {
       authenticated: false,
       distance: '',
       gender: 'female',
-      age: ''
+      age: '',
+      email: '',
+      password: '',
+      loginMessage: ''
     }
   }
 
-  login(e) {
-    this.setState({ authenticated: true});
+  onLogin(event) {
+    if (this.state.email !== 'johndoe@mail.com') {
+      this.setState({ loginMessage: "Wrong password" })
+    } else {
+      this.setState({ authenticated: true, loginMessage: `Welcome ${this.state.email}` });
+    }
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value
+    })
+  }
+
+  renderLoginElements() {
+    if (this.state.authenticated && this.state.loginMessage) {
+      return (
+        <div>
+          <p>{this.state.loginMessage}</p>
+
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <p>{this.state.loginMessage}</p>
+          <LoginForm loginHandler={this.onLogin.bind(this)} inputChangeHandler={this.onChange.bind(this)} />
+
+        </div>
+
+      )
+    }
   }
 
   render() {
-
-  let loginStatus;
-
-    if (this.state.authenticated === false) {
-      loginStatus = <LoginForm onChangeValue={this.login.bind(this)}/>
-    } else {
-      loginStatus = <p>Welcome johndoe@mail.com</p>
-    }
-
     return (
       <div className="App">
         <div>
           <label>Distance</label>
-          <input id="distance" onChange={(e) => this.setState({ distance: e.target.value})}></input>
+          <input id="distance" onChange={(e) => this.setState({ distance: e.target.value })}></input>
         </div>
-        
-        <select id="gender" onChange={(e) => this.setState({gender: e.target.value})}>
+
+        <select id="gender" onChange={(e) => this.setState({ gender: e.target.value })}>
           <option value="female">Female</option>
           <option value="male">Male</option>
         </select>
 
         <div>
           <label>Age</label>
-          <input id="age" onChange={(e) => this.setState({ age: e.target.value})}></input>
+          <input id="age" onChange={(e) => this.setState({ age: e.target.value })}></input>
         </div>
 
         <div>
-          {loginStatus}
+          {this.renderLoginElements()}
         </div>
 
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
-          age={this.state.age}  
+          age={this.state.age}
         />
       </div>
     );

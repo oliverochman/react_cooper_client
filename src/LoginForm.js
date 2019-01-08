@@ -13,15 +13,15 @@ class LoginForm extends Component {
 
     if (this.state.renderForm === true) {
       form = (
-        <form onSubmit={this.props.onChangeValue}>>
+        <form onSubmit={this.props.loginHandler}>
           <div>
-            <label>Email</label>
-            <input id="email"></input>
+            <label >Email</label>
+            <input id="email" onChange={this.props.inputChangeHandler}></input>
           </div>
 
           <div>
             <label>Password</label>
-            <input id="password"></input>
+            <input id="password" onChange={this.props.inputChangeHandler}></input>
           </div>
           <button id="submit">Submit</button>
         </form>
