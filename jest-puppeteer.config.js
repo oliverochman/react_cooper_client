@@ -1,19 +1,14 @@
-const port = process.env.TEST_SERVER_PORT
-    ? Number(process.env.TEST_SERVER_PORT)
-    : 3000
-
-process.env.TEST_SERVER_PORT = port
-
 module.exports = {
     launch: {
-        headless: process.env.CI === 'true',
+        headless: false,
         slowMo: 50,
-        devtools: true
+        devtools: true,
+        args: ["--no-sandbox", "--disable-popup-blocking", "--disable-infobars"]
     },
-    browserContext: process.env.INCOGNITO ? 'incognito' : 'default',
+    browserContext: 'default',
     server: {
-        command: `PORT=${port} react-scripts start`,
-        port,
+        command: `PORT=3000 react-scripts start`,
+        port: 3000,
         launchTimeout: 4000,
     },
 } 
