@@ -1,7 +1,7 @@
 module.exports = {
     launch: {
         headless: false,
-        slowMo: 50,
+        slowMo: 10,
         devtools: true,
         args: ["--no-sandbox", "--disable-popup-blocking", "--disable-infobars"]
     },
