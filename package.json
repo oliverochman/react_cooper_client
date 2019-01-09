@@ -12,6 +12,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "kill:node": "kill -9 `ps aux | grep node | tail -1 | awk '{print $2}'`",
     "test:features": "jest -c jest.config.js"
   },
   "eslintConfig": {

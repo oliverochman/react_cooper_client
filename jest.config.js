@@ -1,5 +1,8 @@
 module.exports = {
     verbose: true,
     preset: "jest-puppeteer",
-    testRegex: ".feature\\.js$"
+    testRegex: ".feature|e2e\\.js$",
+    globals: {
+        appURL: "http://localhost:3000"
+    }
 };

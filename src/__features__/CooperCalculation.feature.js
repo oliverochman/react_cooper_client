@@ -1,14 +1,15 @@
 describe('Cooper Client', async () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:3000');
+    await page.goto(appURL, { waitUntil: 'load' });
+    jest.setTimeout(10000)
+
   });
 
   beforeEach(async () => {
     await page.reload();
   })
-  
 
-  describe('calculates successfully', async () => {
+  describe('calculates successfully',  () => {
     beforeEach(async () => {
       await page.type('input[id="distance"]', '1000')
       await page.select('select[id="gender"]', 'female')
