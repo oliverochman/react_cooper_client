@@ -8,8 +8,9 @@ module.exports = {
     browserContext: 'default',
 
     server: {
-        command: `PORT=3000 BROWSER=none npm run start `,
+        command: `BROWSER=none npm run start `,
         port: 3000,
         launchTimeout: 4000,
-    }
+    },
+    
 } 
