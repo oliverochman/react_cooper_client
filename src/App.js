@@ -17,16 +17,7 @@ class App extends Component {
       loginMessage: ''
     }
     Auth.configure({
-      apiUrl: 'http://localhost:3000/api/v1',
-      emailSignIn: '/auth/sign_in',
-
-      tokenFormat: {
-        "access-token": "{{ access-token }}",
-        "token-type":   "Bearer",
-        client:         "{{ client }}",
-        expiry:         "{{ expiry }}",
-        uid:            "{{ uid }}"
-      },
+      apiUrl: 'http://localhost:3000/api/v1'
     });
   }
 
@@ -42,11 +33,11 @@ class App extends Component {
     .then(function(response) {
       debugger;
       console.log(response);
-    })
+    }.bind(this))
     .fail(function (error) {
       debugger;
       console.log(error);
-    });
+    }.bind(this));
   }
 
     // if (this.state.password !== 'password') {
