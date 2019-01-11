@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 import LoginForm from './LoginForm'
-import axios from 'axios';
+import Auth from 'j-toker';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +16,18 @@ class App extends Component {
       password: '',
       loginMessage: ''
     }
+    Auth.configure({
+      apiUrl: 'http://localhost:3000/api/v1',
+      emailSignIn: '/auth/sign_in',
+
+      tokenFormat: {
+        "access-token": "{{ access-token }}",
+        "token-type":   "Bearer",
+        client:         "{{ client }}",
+        expiry:         "{{ expiry }}",
+        uid:            "{{ uid }}"
+      },
+    });
   }
 
 
@@ -23,26 +35,19 @@ class App extends Component {
     debugger;
     const email = this.state.email;
     const password = this.state.password;
-    axios({
-      url: "http://localhost:3000/api/v1/auth/sign_in",
-      method: 'POST',
-      data: {
-        email: email,
-        password: password
-      },
-      headers: {
-        'HTTP_ACCEPT': 'application/json'
-      }
+    Auth.emailSignIn({
+      email: email,
+      password: password
     })
     .then(function(response) {
       debugger;
       console.log(response);
     })
-    .catch(function (error) {
+    .fail(function (error) {
       debugger;
       console.log(error);
     });
-
+  }
 
     // if (this.state.password !== 'password') {
     //   this.setState({ loginMessage: "Wrong password", authenticated: false })
@@ -51,7 +56,7 @@ class App extends Component {
     // } else {
     //   this.setState({ authenticated: true, loginMessage: `Welcome ${this.state.email}` });
     // }
-  }
+  
 
   onChange(event) {
     this.setState({
