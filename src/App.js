@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 import LoginForm from './LoginForm'
-import Auth from 'j-toker';
+import Auth from 'es-toker';
 
 class App extends Component {
   constructor(props) {
@@ -16,18 +16,15 @@ class App extends Component {
       password: '',
       loginMessage: ''
     }
-    Auth.configure({
-      apiUrl: 'http://localhost:3000/api/v1',
-      emailSignIn: '/auth/sign_in',
+  }
 
-      tokenFormat: {
-        "access-token": "{{ access-token }}",
-        "token-type":   "Bearer",
-        client:         "{{ client }}",
-        expiry:         "{{ expiry }}",
-        uid:            "{{ uid }}"
-      },
+  componentDidMount() {
+    Auth.configure({
+      apiUrl: 'http://localhost:3000/api/v1'
+    }).catch(error => {
+      debugger;
     });
+
   }
 
 
@@ -37,15 +34,12 @@ class App extends Component {
     const password = this.state.password;
     Auth.emailSignIn({
       email: email,
-      password: password
+      password: password,
+      config: Auth.getConfig()
     })
-    .then(function(response) {
+    .then((response) => {
       debugger;
       console.log(response);
-    })
-    .fail(function (error) {
-      debugger;
-      console.log(error);
     });
   }
 
