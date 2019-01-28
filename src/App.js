@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 import LoginForm from './LoginForm'
-import Auth from 'es-toker';
+import {authenticate} from './Auth'
 
 class App extends Component {
   constructor(props) {
@@ -13,44 +13,21 @@ class App extends Component {
       gender: 'female',
       age: '',
       email: '',
-      password: '',
-      loginMessage: ''
+      password: ''
     }
   }
 
-  componentDidMount() {
-    Auth.configure({
-      apiUrl: 'http://localhost:3000/api/v1'
-    }).catch(error => {
-      debugger;
-    });
-
-  }
-
-
   onLogin() {
-    debugger;
-    const email = this.state.email;
-    const password = this.state.password;
-    Auth.emailSignIn({
-      email: email,
-      password: password,
-      config: Auth.getConfig()
-    })
-    .then((response) => {
-      debugger;
-      console.log(response);
-    });
-  }
-
-    // if (this.state.password !== 'password') {
-    //   this.setState({ loginMessage: "Wrong password", authenticated: false })
-    // } else if (this.state.email !== 'johndoe@mail.com') {
-    //   this.setState({ loginMessage: "Wrong email", authenticated: false })
-    // } else {
-    //   this.setState({ authenticated: true, loginMessage: `Welcome ${this.state.email}` });
-    // }
-  
+    this.setState({authenticated: true});
+    authenticate(this.state.email, this.state.password)
+      .then(resp => {
+        if (resp.authenticated === true) {
+          console.log(this.state);
+          console.log(resp);
+        } else {
+          this.setState({authenticated: false});
+        }
+  })}
 
   onChange(event) {
     this.setState({
@@ -58,10 +35,11 @@ class App extends Component {
     })
   }
 
-  renderLoginElements() {
-
-    if (!this.state.authenticated) {
-      return (
+  
+  render() {
+    let renderLogin;
+    if (this.state.authenticated === false) {
+      renderLogin = (
         <div>
           <LoginForm
             loginHandler={this.onLogin.bind(this)}
@@ -70,9 +48,7 @@ class App extends Component {
         </div>
       )
     }
-  }
 
-  render() {
     return (
       <div className="App">
         <div>
@@ -93,11 +69,7 @@ class App extends Component {
         </div>
 
         <div>
-          {this.state.loginMessage}
-          <LoginForm
-            loginHandler={this.onLogin.bind(this)}
-            inputChangeHandler={this.onChange.bind(this)}
-          />
+          {renderLogin}     
         </div>
 
         <DisplayCooperResult
