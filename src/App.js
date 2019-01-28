@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 import LoginForm from './LoginForm'
-import {authenticate} from './Auth'
+import {authenticate, deAuthenticate} from './Auth'
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +29,12 @@ class App extends Component {
         }
   })}
 
+  logout() {
+    deAuthenticate().then(() => {
+      this.setState({authenticated: false});
+    })
+  }
+
   onChange(event) {
     this.setState({
       [event.target.id]: event.target.value
@@ -37,14 +43,21 @@ class App extends Component {
 
   
   render() {
-    let renderLogin;
+    let renderLoginOrLogout;
     if (this.state.authenticated === false) {
-      renderLogin = (
+      renderLoginOrLogout = (
         <div>
           <LoginForm
             loginHandler={this.onLogin.bind(this)}
             inputChangeHandler={this.onChange.bind(this)}
           />
+        </div>
+      )
+      
+    } else {
+      renderLoginOrLogout = (
+        <div>
+          <button onClick={(e) => this.logout()}>Logout</button>
         </div>
       )
     }
@@ -69,7 +82,7 @@ class App extends Component {
         </div>
 
         <div>
-          {renderLogin}     
+          {renderLoginOrLogout}     
         </div>
 
         <DisplayCooperResult
