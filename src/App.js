@@ -17,15 +17,14 @@ class App extends Component {
     }
   }
 
-  onLogin() {
-    this.setState({authenticated: true});
+  onLogin(e) {
+    e.preventDefault();
     authenticate(this.state.email, this.state.password)
       .then(resp => {
         if (resp.authenticated === true) {
-          console.log(this.state);
-          console.log(resp);
+          this.setState({authenticated: true});
         } else {
-          this.setState({authenticated: false});
+          console.log(resp);
         }
   })}
 
@@ -43,6 +42,7 @@ class App extends Component {
 
   
   render() {
+    let user;
     let renderLoginOrLogout;
     if (this.state.authenticated === false) {
       renderLoginOrLogout = (
@@ -55,8 +55,10 @@ class App extends Component {
       )
       
     } else {
+      user = JSON.parse(sessionStorage.getItem('credentials')).uid;
       renderLoginOrLogout = (
         <div>
+          <p>Hi {user}</p>
           <button onClick={(e) => this.logout()}>Logout</button>
         </div>
       )

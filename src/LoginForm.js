@@ -13,7 +13,7 @@ class LoginForm extends Component {
 
     if (this.state.renderForm === true) {
       form = (
-        <form onSubmit={this.props.loginHandler}>
+        <form>
           <div>
             <label >Email</label>
             <input id="email" onChange={this.props.inputChangeHandler}></input>
@@ -23,7 +23,7 @@ class LoginForm extends Component {
             <label>Password</label>
             <input id="password" onChange={this.props.inputChangeHandler}></input>
           </div>
-          <button id="submit">Submit</button>
+          <button  onClick={(e) => this.props.loginHandler(e)} id="submit">Submit</button>
         </form>
       )
     }
