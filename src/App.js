@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DisplayCooperResult from './DisplayCooperResult'
 import LoginForm from './LoginForm'
-import {authenticate, deAuthenticate} from './Auth'
+import {authenticate, deAuthenticate} from './Modules/Auth'
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +13,8 @@ class App extends Component {
       gender: 'female',
       age: '',
       email: '',
-      password: ''
+      password: '',
+      entrySaved: false
     }
   }
 
@@ -35,32 +36,37 @@ class App extends Component {
   }
 
   onChange(event) {
+
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.id]: event.target.value,
+      entrySaved: false
     })
   }
 
-  
+  entryHandler() {
+    this.setState({entrySaved: true})
+  }
+
   render() {
     let user;
     let renderLoginOrLogout;
     if (this.state.authenticated === false) {
       renderLoginOrLogout = (
-        <div>
+        <React.Fragment>
           <LoginForm
             loginHandler={this.onLogin.bind(this)}
             inputChangeHandler={this.onChange.bind(this)}
           />
-        </div>
+        </React.Fragment>
       )
       
     } else {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
       renderLoginOrLogout = (
-        <div>
+        <React.Fragment>
           <p>Hi {user}</p>
           <button onClick={(e) => this.logout()}>Logout</button>
-        </div>
+        </React.Fragment>
       )
     }
 
@@ -73,7 +79,7 @@ class App extends Component {
           </input>
         </div>
 
-        <select id="gender" onChange={(e) => this.setState({ gender: e.target.value })}>
+        <select id="gender" onChange={this.onChange.bind(this)}>
           <option value="female">Female</option>
           <option value="male">Male</option>
         </select>
@@ -91,6 +97,9 @@ class App extends Component {
           distance={this.state.distance}
           gender={this.state.gender}
           age={this.state.age}
+          authenticated={this.state.authenticated}
+          entrySaved={this.state.entrySaved}
+          entryHandler={this.entryHandler.bind(this)}
         />
       </div>
     );
