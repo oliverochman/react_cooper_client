@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import DisplayCooperResult from './DisplayCooperResult'
-import LoginForm from './LoginForm'
+import DisplayCooperResult from './Components/DisplayCooperResult'
+import DisplayPerfromanceData from './Components/DisplayPerformanceData'
+
+import LoginForm from './Components/LoginForm'
 import {authenticate, deAuthenticate} from './Modules/Auth'
 
 class App extends Component {
@@ -36,7 +38,6 @@ class App extends Component {
   }
 
   onChange(event) {
-
     this.setState({
       [event.target.id]: event.target.value,
       entrySaved: false
@@ -44,12 +45,19 @@ class App extends Component {
   }
 
   entryHandler() {
-    this.setState({entrySaved: true})
+    this.setState({entrySaved: true});
+    this.setState({updateIndex: true});
+  }
+  
+  indexUpdated() {
+    this.setState({updateIndex: false});
+
   }
 
   render() {
     let user;
     let renderLoginOrLogout;
+    let performanceDataIndex;
     if (this.state.authenticated === false) {
       renderLoginOrLogout = (
         <React.Fragment>
@@ -68,7 +76,16 @@ class App extends Component {
           <button onClick={(e) => this.logout()}>Logout</button>
         </React.Fragment>
       )
+      performanceDataIndex = (
+        <React.Fragment>
+          <DisplayPerfromanceData
+            updateIndex={this.state.updateIndex}
+            indexUpdated={this.indexUpdated.bind(this)}
+          />
+        </React.Fragment>
+      )
     }
+
 
     return (
       <div className="App">
@@ -90,7 +107,8 @@ class App extends Component {
         </div>
 
         <div>
-          {renderLoginOrLogout}     
+          {renderLoginOrLogout}
+          {performanceDataIndex}   
         </div>
 
         <DisplayCooperResult

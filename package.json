@@ -29,6 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "jest-dev-server": "^3.7.0",

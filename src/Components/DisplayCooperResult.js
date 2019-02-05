@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import cooperCalculator from './Modules/CooperCalculator';
-import saveData from './Modules/Performance-Data'
+import cooperCalculator from '../Modules/CooperCalculator';
+import {saveData} from '../Modules/Performance-Data';
 
 class DisplayCooperResult extends Component {
   
@@ -30,7 +30,7 @@ class DisplayCooperResult extends Component {
           <button onClick={e => this.saveCooperData(e)}>Save entry</button>
         </React.Fragment>
       )
-    } else if (this.props.entrySaved === true) {
+    } else if (this.props.authenticated === true && this.props.entrySaved === true) {
       saveButton = (
         <React.Fragment>
           <p>Your entry was saved</p>

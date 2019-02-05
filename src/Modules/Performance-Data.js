@@ -16,4 +16,19 @@ const saveData = (result) => {
   });
 };
 
-export default saveData;
+const getData = () => {
+  const currentUser = JSON.parse(sessionStorage.getItem(['current_user']));
+  const path = apiUrl + '/performance_data';
+  return new Promise((resolve, reject) => {
+    axios.get(path, {
+      params: {
+        user_id: currentUser.id
+      }
+    })
+    .then(response => {
+      resolve(response)
+    });
+  });
+};
+
+export { getData, saveData }
