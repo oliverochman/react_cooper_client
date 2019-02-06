@@ -16,7 +16,8 @@ class App extends Component {
       age: '',
       email: '',
       password: '',
-      entrySaved: false
+      entrySaved: false,
+      renderLoginForm: false
     }
   }
 
@@ -29,11 +30,14 @@ class App extends Component {
         } else {
           console.log(resp);
         }
-  })}
+      });
+  }
 
   logout() {
     deAuthenticate().then(() => {
       this.setState({authenticated: false});
+      this.setState({renderLoginForm: false});
+
     })
   }
 
@@ -51,14 +55,13 @@ class App extends Component {
   
   indexUpdated() {
     this.setState({updateIndex: false});
-
   }
 
   render() {
     let user;
     let renderLoginOrLogout;
     let performanceDataIndex;
-    if (this.state.authenticated === false) {
+    if (this.state.authenticated === false && this.state.renderLoginForm === true) {
       renderLoginOrLogout = (
         <React.Fragment>
           <LoginForm
@@ -68,22 +71,34 @@ class App extends Component {
         </React.Fragment>
       )
       
+    } else if (this.state.authenticated === false && this.state.renderLoginForm === false) {
+      renderLoginOrLogout = (
+        <button onClick={() => this.setState({renderLoginForm: true})}>Login</button>
+      )
     } else {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
       renderLoginOrLogout = (
         <React.Fragment>
           <p>Hi {user}</p>
-          <button onClick={(e) => this.logout()}>Logout</button>
+          <button onClick={() => this.logout()}>Logout</button>
         </React.Fragment>
       )
-      performanceDataIndex = (
-        <React.Fragment>
-          <DisplayPerfromanceData
-            updateIndex={this.state.updateIndex}
-            indexUpdated={this.indexUpdated.bind(this)}
-          />
-        </React.Fragment>
-      )
+      if (this.state.renderIndex === true) {
+        performanceDataIndex = (
+          <React.Fragment>
+            <DisplayPerfromanceData
+              updateIndex={this.state.updateIndex}
+              indexUpdated={this.indexUpdated.bind(this)}
+            />
+            <button onClick={() => this.setState({renderIndex: false})}>Hide past entries</button>
+          </React.Fragment>
+        )
+      } else {
+        performanceDataIndex = (
+          <button onClick={() => this.setState({renderIndex: true})}>Show past entries</button>
+        )
+      }
+      
     }
 
 

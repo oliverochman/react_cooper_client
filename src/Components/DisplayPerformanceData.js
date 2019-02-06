@@ -9,6 +9,9 @@ class DisplayPerformanceData extends Component {
       performanceData: null
     }
   }
+  componentDidMount() {
+    this.getPerformanceData()
+  }
 
   async getPerformanceData() {
     let result = await getData();
@@ -20,16 +23,10 @@ class DisplayPerformanceData extends Component {
   render () {
     let dataIndex;
 
-    if (this.state.performanceData === null) {
-      dataIndex = (
-        <React.Fragment>
-          <button onClick={this.getPerformanceData.bind(this)}>Show past Cooper entries</button>
-        </React.Fragment>
-      )
-    } else {
-      if (this.props.updateIndex === true) {
-        this.getPerformanceData();
-      }
+    if (this.props.updateIndex === true) {
+      this.getPerformanceData();
+    }
+    if (this.state.performanceData != null) {
       dataIndex = (
         <div>
           {this.state.performanceData.map(item => {
@@ -38,11 +35,12 @@ class DisplayPerformanceData extends Component {
         </div>
       )
     }
+
     return (
       <div>
         {dataIndex}
       </div>
     )
-  }
+  }      
 }
-export default DisplayPerformanceData
+  export default DisplayPerformanceData
