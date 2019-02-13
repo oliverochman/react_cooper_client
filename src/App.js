@@ -20,20 +20,19 @@ class App extends Component {
       password: '',
       entrySaved: false,
       renderLoginForm: false,
-      errorMessage: ''
+      message: ''
     }
   }
 
-  onLogin(e) {
+  async onLogin(e) {
     e.preventDefault();
-    authenticate(this.state.email, this.state.password)
-      .then(resp => {
-        if (resp.authenticated === true) {
-          this.setState({ authenticated: true });
-        } else {
-          this.setState({errorMessage: resp.errors[0], renderLoginForm: false})
-        }
-      });
+    let resp = await authenticate(this.state.email, this.state.password)
+    if (resp.authenticated === true) {
+      this.setState({ authenticated: true });
+    } else {
+      this.setState({ message: resp.message, renderLoginForm: false })
+    }
+
   }
 
   logout() {
@@ -77,7 +76,7 @@ class App extends Component {
       renderLoginOrLogout = (
         <>
           <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
-          <p>{this.state.errorMessage}</p>
+          <p>{this.state.message}</p>
         </>
       )
     } else {

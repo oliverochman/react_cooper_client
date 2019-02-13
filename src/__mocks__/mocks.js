@@ -5,22 +5,16 @@ beforeAll(async () => {
   // console.log(MockedUsers.missingUserResponse)
 
   const createResponse = (path, uid) => {
-    console.log('UID ' + JSON.parse(uid).email)
-
-    console.log('Path ' + path)
-
-    let response, user
+    let response
     if (path === 'sign_in') {
+      let user
       user = MockedUsers.mockedUserResponses.find(user => {
         return user.headers.uid === JSON.parse(uid).email
       })
       response = user || MockedUsers.missingUserResponse
-      console.log(response)
-
       return response
     }
   }
-
 
   const requests = {
     'sign_in': {}
@@ -48,10 +42,11 @@ beforeAll(async () => {
       let json = await response.json()
       let headers = await response.headers()
       let status = await response.status()
-      console.log("Intecepted responce from: " + source)
-      console.log(json)
-      console.log(headers)
-      console.log('status: ' + status)
+      // Toggle the comment to see the response in your terminal
+      // console.log("Intecepted responce from: " + source)
+      // console.log(json)
+      // console.log(headers)
+      // console.log('status: ' + status)
     }
   })
 
