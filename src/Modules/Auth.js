@@ -19,10 +19,7 @@ const authenticate = (email, password) => {
                 });
             })
             .catch(error => {
-                resolve({
-                    authenticated: false
-                })
-                reject(error);
+                reject({authenticated: false, message: error});
             });
     })
 };
