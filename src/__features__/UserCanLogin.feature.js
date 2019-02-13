@@ -25,7 +25,7 @@ describe('User attempts to login', () => {
   })
 
   describe('with invalid', async () => {
-    xit('credentials', async () => {
+    it('credentials', async () => {
       await page.click('#login')
       await page.type('input[id="email"]', 'wrongjohndoe@mail.com')
       await page.type('input[id="password"]', 'wronpassword')
