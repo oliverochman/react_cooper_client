@@ -74,7 +74,7 @@ class App extends Component {
       
     } else if (this.state.authenticated === false && this.state.renderLoginForm === false) {
       renderLoginOrLogout = (
-        <button onClick={() => this.setState({renderLoginForm: true})}>Login</button>
+        <button id="login" onClick={() => this.setState({renderLoginForm: true})}>Login</button>
       )
     } else {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
