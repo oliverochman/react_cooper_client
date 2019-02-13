@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import DisplayCooperResult from './Components/DisplayCooperResult'
-import DisplayPerfromanceData from './Components/DisplayPerformanceData'
+import DisplayCooperResult from './Components/DisplayCooperResult';
+import DisplayPerfromanceData from './Components/DisplayPerformanceData';
 
-import LoginForm from './Components/LoginForm'
-import {authenticate, deAuthenticate} from './Modules/Auth'
+import LoginForm from './Components/LoginForm';
+import {authenticate, deAuthenticate} from './Modules/Auth';
+import 'babel-polyfill';
+
 
 class App extends Component {
   constructor(props) {
@@ -49,8 +51,7 @@ class App extends Component {
   }
 
   entryHandler() {
-    this.setState({entrySaved: true});
-    this.setState({updateIndex: true});
+    this.setState({entrySaved: true, updateIndex: true});
   }
   
   indexUpdated() {

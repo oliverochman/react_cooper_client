@@ -8,15 +8,26 @@ class DisplayCooperResult extends Component {
     return cooperCalculator(this.props.distance, this.props.gender, this.props.age);
   }
 
-  saveCooperData() {
+  // saveCooperData() {
+  //   const result = this.calculate();
+  //   saveData(result).then(response => {
+  //     if (response === "all good") {
+  //       this.props.entryHandler();
+  //     } else {
+  //       console.log('error')
+  //     }
+  //   });
+  // }
+
+  async saveCooperData() {
     const result = this.calculate();
-    saveData(result).then(response => {
-      if (response === "all good") {
-        this.props.entryHandler();
-      } else {
-        console.log('error')
-      }
-    });
+    try {
+      let response = await saveData(result);
+      console.log(response);
+      this.props.entryHandler();
+    } catch(error) {
+      console.log(error);
+    }
   }
 
 
@@ -27,7 +38,7 @@ class DisplayCooperResult extends Component {
     if (this.props.authenticated === true && this.props.entrySaved === false) {
       saveButton = (
         <React.Fragment>
-          <button onClick={e => this.saveCooperData(e)}>Save entry</button>
+          <button onClick={this.saveCooperData.bind(this)}>Save entry</button>
         </React.Fragment>
       )
     } else if (this.props.authenticated === true && this.props.entrySaved === true) {

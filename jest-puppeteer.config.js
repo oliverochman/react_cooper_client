@@ -3,14 +3,20 @@ module.exports = {
         headless: false,
         slowMo: 10,
         devtools: true,
-        args: ["--no-sandbox", "--disable-popup-blocking", "--disable-infobars"]
+        timeout: 100000,
+        args: [
+                "--no-sandbox", 
+                "--disable-popup-blocking", 
+                "--disable-infobars", 
+                "--disable-web-security"
+            ]
     },
     browserContext: 'default',
 
     server: {
         command: `BROWSER=none npm run start `,
-        port: 3000,
-        launchTimeout: 4000,
+        port: 3001,
+        launchTimeout: 40000,
     },
     
 } 

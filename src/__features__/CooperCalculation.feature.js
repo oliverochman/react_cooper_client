@@ -1,8 +1,8 @@
 describe('Cooper Client', async () => {
   beforeAll(async () => {
-    await page.goto(appURL, { waitUntil: 'load' });
     jest.setTimeout(10000)
 
+    await page.goto(appURL);
   });
 
   beforeEach(async () => {

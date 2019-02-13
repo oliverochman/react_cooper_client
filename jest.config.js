@@ -3,6 +3,6 @@ module.exports = {
     preset: "jest-puppeteer",
     testRegex: ".feature|e2e\\.js$",
     globals: {
-        appURL: "http://localhost:3000"
+        appURL: "http://localhost:3001"
     }
 };

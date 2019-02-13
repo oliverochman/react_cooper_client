@@ -2,7 +2,7 @@ describe('User attempts to login',  () => {
 
     beforeAll(async () => {
 
-        await page.goto(appURL, { waitUntil: 'load' });
+        await page.goto(appURL);
 
         jest.setTimeout(10000)
 

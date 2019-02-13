@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {getData} from '../Modules/Performance-Data';
-import 'babel-polyfill'
 
 class DisplayPerformanceData extends Component {
   constructor(props) {
