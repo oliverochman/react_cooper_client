@@ -1,3 +1,5 @@
+require('../__mocks__/mocks')
+
 describe('User attempts to login', () => {
 
   beforeAll(async () => {
@@ -17,7 +19,7 @@ describe('User attempts to login', () => {
       await page.type('input[id="email"]', 'johndoe@mail.com')
       await page.type('input[id="password"]', 'password')
       await page.click('button[id="submit"]')
-      await expect(page).toMatch('Welcome johndoe@mail.com')
+      await expect(page).toMatch('Hi johndoe@mail.com')
     })
 
   })
