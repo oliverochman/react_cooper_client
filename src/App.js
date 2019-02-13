@@ -4,7 +4,7 @@ import DisplayCooperResult from './Components/DisplayCooperResult';
 import DisplayPerfromanceData from './Components/DisplayPerformanceData';
 
 import LoginForm from './Components/LoginForm';
-import {authenticate, deAuthenticate} from './Modules/Auth';
+import { authenticate, deAuthenticate } from './Modules/Auth';
 import 'babel-polyfill';
 
 
@@ -19,7 +19,8 @@ class App extends Component {
       email: '',
       password: '',
       entrySaved: false,
-      renderLoginForm: false
+      renderLoginForm: false,
+      errorMessage: ''
     }
   }
 
@@ -28,17 +29,17 @@ class App extends Component {
     authenticate(this.state.email, this.state.password)
       .then(resp => {
         if (resp.authenticated === true) {
-          this.setState({authenticated: true});
+          this.setState({ authenticated: true });
         } else {
-          console.log(resp);
+          this.setState({errorMessage: resp.errors[0], renderLoginForm: false})
         }
       });
   }
 
   logout() {
     deAuthenticate().then(() => {
-      this.setState({authenticated: false});
-      this.setState({renderLoginForm: false});
+      this.setState({ authenticated: false });
+      this.setState({ renderLoginForm: false });
 
     })
   }
@@ -51,11 +52,11 @@ class App extends Component {
   }
 
   entryHandler() {
-    this.setState({entrySaved: true, updateIndex: true});
+    this.setState({ entrySaved: true, updateIndex: true });
   }
-  
+
   indexUpdated() {
-    this.setState({updateIndex: false});
+    this.setState({ updateIndex: false });
   }
 
   render() {
@@ -71,10 +72,13 @@ class App extends Component {
           />
         </React.Fragment>
       )
-      
+
     } else if (this.state.authenticated === false && this.state.renderLoginForm === false) {
       renderLoginOrLogout = (
-        <button id="login" onClick={() => this.setState({renderLoginForm: true})}>Login</button>
+        <>
+          <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
+          <p>{this.state.errorMessage}</p>
+        </>
       )
     } else {
       user = JSON.parse(sessionStorage.getItem('credentials')).uid;
@@ -91,15 +95,15 @@ class App extends Component {
               updateIndex={this.state.updateIndex}
               indexUpdated={this.indexUpdated.bind(this)}
             />
-            <button onClick={() => this.setState({renderIndex: false})}>Hide past entries</button>
+            <button onClick={() => this.setState({ renderIndex: false })}>Hide past entries</button>
           </React.Fragment>
         )
       } else {
         performanceDataIndex = (
-          <button onClick={() => this.setState({renderIndex: true})}>Show past entries</button>
+          <button onClick={() => this.setState({ renderIndex: true })}>Show past entries</button>
         )
       }
-      
+
     }
 
 
@@ -124,7 +128,7 @@ class App extends Component {
 
         <div>
           {renderLoginOrLogout}
-          {performanceDataIndex}   
+          {performanceDataIndex}
         </div>
 
         <DisplayCooperResult

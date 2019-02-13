@@ -9,17 +9,14 @@ beforeAll(async () => {
 
     console.log('Path ' + path)
 
-    let response
+    let response, user
     if (path === 'sign_in') {
+      user = MockedUsers.mockedUserResponses.find(user => {
+        return user.headers.uid === JSON.parse(uid).email
+      })
+      response = user || MockedUsers.missingUserResponse
+      console.log(response)
 
-      try {
-        response = MockedUsers.mockedUserResponses.find(user => {
-          return user.headers.uid === JSON.parse(uid).email
-        })
-      } catch {
-        response = MockedUsers.missingUserResponse
-        console.log(response)
-      }
       return response
     }
   }
