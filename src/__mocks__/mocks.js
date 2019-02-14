@@ -1,17 +1,14 @@
-const MockedUsers = require('./mockedUsers')
+const MockResponses = require('./mockResponses')
 beforeAll(async () => {
 
-  // console.log(MockedUsers.mockedUserResponses)
-  // console.log(MockedUsers.missingUserResponse)
-
-  const createResponse = (path, uid) => {
+  const createResponse = (path, params) => {
     let response
     if (path === 'sign_in') {
       let user
-      user = MockedUsers.mockedUserResponses.find(user => {
-        return user.headers.uid === JSON.parse(uid).email
+      user = MockResponses.mockedUserResponses.find(user => {
+        return user.headers.uid === JSON.parse(params).email
       })
-      response = user || MockedUsers.missingUserResponse
+      response = user || MockResponses.missingUserResponse
       return response
     }
   }
@@ -25,8 +22,7 @@ beforeAll(async () => {
   await page.on('request', interceptedRequest => {
     const requestedEndpoint = interceptedRequest.url().split("/").pop();
     if (requests[requestedEndpoint]) {
-      console.log('Params: ' + interceptedRequest.postData())
-      let params = interceptedRequest.postData()
+      params = interceptedRequest.postData()
       interceptedRequest.respond(createResponse(requestedEndpoint, params));
     } else {
       interceptedRequest.continue();

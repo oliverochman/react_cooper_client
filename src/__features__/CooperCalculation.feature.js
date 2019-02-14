@@ -1,7 +1,6 @@
 describe('Cooper Client', async () => {
   beforeAll(async () => {
     jest.setTimeout(10000)
-
     await page.goto(appURL);
   });
 
@@ -9,7 +8,7 @@ describe('Cooper Client', async () => {
     await page.reload();
   })
 
-  describe('calculates successfully',  () => {
+  describe('calculates successfully and',  () => {
     beforeEach(async () => {
       await page.type('input[id="distance"]', '1000')
       await page.select('select[id="gender"]', 'female')
