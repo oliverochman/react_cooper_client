@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const apiUrl = 'http://localhost:3000/api/v1';
+// const apiUrl = 'http://localhost:3000/api/v1';
+const apiUrl = 'http://localhost:3000'
 
 const saveData = (result) => {
   const currentUser = JSON.parse(sessionStorage.getItem(['current_user']));

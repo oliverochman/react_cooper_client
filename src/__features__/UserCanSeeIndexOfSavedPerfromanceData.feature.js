@@ -1,0 +1,25 @@
+require('../__mocks__/mocks')
+
+describe('User attempts to view his/her performance data', () => {
+
+  beforeAll(async () => {
+    jest.setTimeout(10000)
+    await page.goto(appURL);
+
+  });
+
+  beforeEach(async () => {
+    await page.reload()
+    await page.click('#login')
+    await page.type('input[id="email"]', 'johndoe@mail.com')
+    await page.type('input[id="password"]', 'password')
+    await page.click('button[id="submit"]')
+  })
+
+  it('successfully', async () => {
+    // await page.click('#show-index')
+    // await expect(page).toMatch('Below Average')
+    // await expect(page).toMatch('Average')
+    // await expect(page).toMatch('Above Average')
+  })
+})
