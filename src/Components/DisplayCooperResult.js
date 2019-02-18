@@ -38,7 +38,7 @@ class DisplayCooperResult extends Component {
     if (this.props.authenticated === true && this.props.entrySaved === false) {
       saveButton = (
         <React.Fragment>
-          <button onClick={this.saveCooperData.bind(this)}>Save entry</button>
+          <button id="save-result" onClick={this.saveCooperData.bind(this)}>Save entry</button>
         </React.Fragment>
       )
     } else if (this.props.authenticated === true && this.props.entrySaved === true) {
