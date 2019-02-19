@@ -13,7 +13,12 @@ beforeAll(async () => {
         return response
       case 'performance_data':
         if ((request.method()) === 'POST') {
+          debugger;
           response = MockResponses.savingEntryResponse
+        } else if ((request.method()) === 'GET') {
+          console.log('running else block')
+          debugger;
+          response = MockResponses.performanceDataIndexResponse
         }
         return response
     }
@@ -42,15 +47,15 @@ beforeAll(async () => {
     const source = response.request().url().split("/").pop();
     // This is an example of endpoints we want to monitor
     // This conditional can of course be removed or edited
-    if (source === "sign_in") {
+    if (source === "sign_in" || source === "perfromance_data") {
       let json = await response.json()
       let headers = await response.headers()
       let status = await response.status()
       // Toggle the comment to see the response in your terminal
-      // console.log("Intecepted responce from: " + source)
-      // console.log(json)
-      // console.log(headers)
-      // console.log('status: ' + status)
+      console.log("Intecepted responce from: " + source)
+      console.log(json)
+      console.log(headers)
+      console.log('status: ' + status)
     }
   })
 

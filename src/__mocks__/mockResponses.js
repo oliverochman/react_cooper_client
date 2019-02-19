@@ -52,37 +52,38 @@ module.exports = {
     )
   },
 
-  // "performance_data": {
-  //   status: 200,
-  //   headers: {},
-  //   data: JSON.stringify(
-  //     {
-  //       entries: [
-  //         {
-  //           data: {
-  //             message: "Below Average"
-  //           },
-  //           id: 1,
-  //           user_id: 1
-  //         },
-  //         {
-  //           data: {
-  //             message: "Average"
-  //           },
-  //           id: 2,
-  //           user_id: 1
-  //         },
-  //         {
-  //           data: {
-  //             message: "Above Average"
-  //           },
-  //           id: 3,
-  //           user_id: 1
-  //         }
-  //       ]
-  //     }
-  //   )
-  // },
+  performanceDataIndexResponse: {
+    status: 200,
+    headers: {},
+    body: JSON.stringify(
+      {
+        entries: [
+          {
+            data: {
+              message: "Below Average"
+            },
+            id: 1,
+            user_id: 1
+          },
+          {
+            data: {
+              message: "Average"
+            },
+            id: 2,
+            user_id: 1
+          },
+          {
+            data: {
+              message: "Above Average"
+            },
+            id: 3,
+            user_id: 1
+          }
+        ]
+      }
+    )
+  
+  
   savingEntryResponse: {
     status: 200,
     headers: {},
