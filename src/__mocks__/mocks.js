@@ -12,14 +12,15 @@ beforeAll(async () => {
         response = user || MockResponses.missingUserResponse
         return response
       case 'performance_data':
-        if ((request.method()) === 'POST') {
-          debugger;
-          response = MockResponses.savingEntryResponse
-        } else if ((request.method()) === 'GET') {
-          console.log('running else block')
-          debugger;
-          response = MockResponses.performanceDataIndexResponse
-        }
+        // if ((request.method()) === 'POST') {
+        //   debugger;
+        //   response = MockResponses.savingEntryResponse
+        // } else if ((request.method()) === 'GET') {
+        //   console.log('running else block')
+        //   debugger;
+        //   response = MockResponses.performanceDataIndexResponse
+        // }
+        response = MockResponses.performanceDataIndexResponse
         return response
     }
     
@@ -33,7 +34,8 @@ beforeAll(async () => {
   await page.setRequestInterception(true);
 
   await page.on('request', interceptedRequest => {
-    const requestedEndpoint = interceptedRequest.url().split("/").pop();
+    const requestedEndpoint = interceptedRequest.url().split("/").pop().split('?')[0];
+    console.log("Making request to: " + requestedEndpoint)
     if (requests[requestedEndpoint]) {
       params = interceptedRequest.postData()
       interceptedRequest.respond(createResponse(requestedEndpoint, params, interceptedRequest));

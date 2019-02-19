@@ -5,6 +5,7 @@ describe('User attempts to view his/her performance data', () => {
   beforeAll(async () => {
     jest.setTimeout(10000)
     await page.goto(appURL);
+    await page.setBypassCSP(true)
 
   });
 

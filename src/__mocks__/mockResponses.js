@@ -19,7 +19,7 @@ module.exports = {
         }
       })
     },
-  
+
     {
       status: 200,
       headers: {
@@ -40,7 +40,7 @@ module.exports = {
       })
     }
   ],
-  
+
   missingUserResponse: {
     status: 401,
     headers: {},
@@ -82,8 +82,8 @@ module.exports = {
         ]
       }
     )
-  
-  
+  },
+
   savingEntryResponse: {
     status: 200,
     headers: {},

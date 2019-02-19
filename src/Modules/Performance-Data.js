@@ -18,7 +18,6 @@ const saveData = (result) => {
 };
 
 const getData = () => {
-  console.log('getData here')
   const currentUser = JSON.parse(sessionStorage.getItem(['current_user']));
   const path = apiUrl + '/performance_data';
   return new Promise((resolve, reject) => {
@@ -28,7 +27,6 @@ const getData = () => {
       }
     })
     .then(response => {
-      debugger;
       resolve(response);
     });
   });
