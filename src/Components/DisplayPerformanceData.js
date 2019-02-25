@@ -36,7 +36,7 @@ class DisplayPerformanceData extends Component {
     }
 
     return (
-      <div id="index">
+      <div>
         {dataIndex}
       </div>
     )
