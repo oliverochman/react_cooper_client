@@ -191,3 +191,49 @@ Previously we modified the rendering of this component in the `App` component to
 ```
 
 If you run the test now, both test in the feature file should go green.
+
+We want to be able to run these test without sending requests to the backend. Lets mock the repsponse out. 
+
+First we need to add some to the `mocksConfig` file, so it intercepts the `/performance_data` request:
+
+```js  
+const createResponse = (path, params, request) => {
+    let response
+    switch (path) {
+      case 'sign_in':
+        let user
+        user = MockResponses.mockedUserResponses.find(user => {
+          return user.headers.uid === JSON.parse(params).email
+        })
+        response = user || MockResponses.missingUserResponse
+        return response
+      case 'performance_data':
+        return MockResponses.savingEntryResponse
+    }
+    
+  }
+
+  const requests = {
+    'sign_in': {},
+    'performance_data': {}
+  }
+
+  // ...
+```
+
+Now we need to add the response that we are calling on if puppeteer intercepts `/performance_data`
+
+Add this to `mockResponses`:
+
+```js
+// ...
+  savingEntryResponse: {
+    status: 200,
+    headers: {},
+    body: JSON.stringify({
+      message: "all good"
+    })
+  }
+```
+
+Now you will get all green when you run the tests without the backend running.

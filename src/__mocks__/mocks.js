@@ -12,14 +12,14 @@ beforeAll(async () => {
         response = user || MockResponses.missingUserResponse
         return response
       case 'performance_data':
-        // if ((request.method()) === 'POST') {
-        //   debugger;
-        //   response = MockResponses.savingEntryResponse
-        // } else if ((request.method()) === 'GET') {
-        //   console.log('running else block')
-        //   debugger;
-        //   response = MockResponses.performanceDataIndexResponse
-        // }
+      if ((request.method()) === 'POST') {
+        debugger;
+        response = MockResponses.savingEntryResponse
+      } else if ((request.method()) === 'GET') {
+        console.log('running else block')
+        debugger;
+        response = MockResponses.performanceDataIndexResponse
+      }
         response = MockResponses.performanceDataIndexResponse
         return response
     }
