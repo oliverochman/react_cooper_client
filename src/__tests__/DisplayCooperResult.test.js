@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import DisplayCooperResult from '../DisplayCooperResult';
+import DisplayCooperResult from '../Components/DisplayCooperResult';
 
 describe('<DisplatCooperResult />', () => {
   it('evaluates the correct result for female/poor', () => {
